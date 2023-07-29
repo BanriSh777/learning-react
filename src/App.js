@@ -2,11 +2,15 @@ import React from 'react';
 import './style.css';
 
 export default function App() {
-  return <Main />;
+  return <Main className="main-view" />;
 }
 
 function Main() {
-  return <main class="main-view"></main>;
+  return (
+    <main>
+      <Name />
+    </main>
+  );
 }
 
 function Header() {
@@ -19,4 +23,12 @@ function Header() {
 
 function Button() {
   return <button class="my-button">My Button</button>;
+}
+
+function Name() {
+  const fname = 'mahesh';
+  const lname = 'addipalli';
+  let nameColor = 'red';
+  let name = fname.toUpperCase() + ' ' + lname.toUpperCase();
+  return <span style={{ color: nameColor }}>{name}</span>;
 }
