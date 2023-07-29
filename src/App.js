@@ -10,9 +10,16 @@ var isLoggedIn = true;
 function Main() {
   return (
     <main>
-      <StudentData view={1} />
+      <SayHiButton name="Shalom" number={4222224} />
     </main>
   );
+}
+
+function SayHiButton(props) {
+  function sayHi() {
+    alert('Hi ' + props.name + ', your number ' + props.number);
+  }
+  return <button onClick={sayHi}>Say Hi</button>;
 }
 
 const data = [
