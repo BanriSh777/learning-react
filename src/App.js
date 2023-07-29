@@ -10,8 +10,53 @@ var isLoggedIn = true;
 function Main() {
   return (
     <main>
-      <Session />
+      <StudentData view={1} />
     </main>
+  );
+}
+
+const data = [
+  {
+    name: 'Mahesh',
+    age: 13,
+    roll: 29,
+  },
+  {
+    name: 'Shalom',
+    age: 12,
+    roll: 32,
+  },
+  {
+    name: 'Sumanth',
+    age: 12,
+    roll: 36,
+  },
+];
+
+function StudentData(props) {
+  let studentListView = (
+    <ol>
+      {data.map((studentRecord) => (
+        <li>
+          <Student data={studentRecord} />
+        </li>
+      ))}
+    </ol>
+  );
+
+  return (
+    <>
+      <h2>Students</h2>
+      {studentListView}
+    </>
+  );
+}
+
+function Student(studentProp) {
+  return (
+    <>
+      {studentProp.data.name}, RollNo: {studentProp.data.roll}{' '}
+    </>
   );
 }
 
