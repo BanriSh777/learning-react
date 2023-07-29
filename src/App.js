@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
 export default function App() {
@@ -10,8 +10,31 @@ var isLoggedIn = true;
 function Main() {
   return (
     <main>
-      <SayHiButton name="Shalom" number={4222224} />
+      Decreases until 0 : <Counter func={0} initial={100} />
+      Increases: <Counter />
     </main>
+  );
+}
+
+function Counter(props) {
+  let count, setCount;
+  if (props.initial) [count, setCount] = useState(props.initial);
+  else [count, setCount] = useState(0);
+  let increment = () => {
+    setCount(++count);
+  };
+  let decrement = () => {
+    if (count > 0) setCount(--count);
+  };
+
+  return (
+    <>
+      <button onClick={props.func == 0 ? decrement : increment}>
+        Click Me
+      </button>
+      {!!count && <b>Clicked - {count} times</b>}
+      <br />
+    </>
   );
 }
 
