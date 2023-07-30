@@ -13,10 +13,16 @@ function Main() {
   if (initial) [count, setCount] = useState(initial);
   else [count, setCount] = useState(0);
 
+  function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  }
+
   return (
     <main>
       <Counter func="decrease" count={count} update={setCount} />
-      {!!count && <b>{count}</b>}
+      {!!count && <b>{pad(count, 3, 0)}</b>}
       <Counter func="increase" count={count} update={setCount} />
     </main>
   );
