@@ -8,32 +8,39 @@ export default function HelloWorldApp() {
 var isLoggedIn = true;
 
 function Main() {
+  let count, setCount;
+  const initial = 100;
+  if (initial) [count, setCount] = useState(initial);
+  else [count, setCount] = useState(0);
+
   return (
     <main>
-      Decreases until 0 : <Counter func={0} initial={100} />
-      Increases: <Counter />
+      <Counter func="decrease" count={count} update={setCount} />
+      {!!count && <b>{count}</b>}
+      <Counter func="increase" count={count} update={setCount} />
     </main>
   );
 }
 
-function Counter(props) {
-  let count, setCount;
-  if (props.initial) [count, setCount] = useState(props.initial);
-  else [count, setCount] = useState(0);
+function Button({ content, clickHandler }) {
+  return <button onClick={clickHandler}>{content}</button>;
+}
+
+function Counter({ func, count, update }) {
   let increment = () => {
-    setCount(++count);
+    update(++count);
   };
   let decrement = () => {
-    if (count > 0) setCount(--count);
+    if (count > 0) update(--count);
   };
 
   return (
     <>
-      <button onClick={props.func == 0 ? decrement : increment}>
-        Click Me
-      </button>
-      {!!count && <b>Clicked - {count} times</b>}
-      <br />
+      {func == 'decrease' ? (
+        <Button clickHandler={decrement} content="-" />
+      ) : (
+        <Button clickHandler={increment} content="+" />
+      )}
     </>
   );
 }
@@ -146,7 +153,7 @@ function Header() {
   );
 }
 
-function Button() {
+function MyButton() {
   return <button className="my-button">My Button</button>;
 }
 
